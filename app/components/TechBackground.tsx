@@ -1,62 +1,54 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, Database, Globe, Cpu, Server, Terminal, Smartphone, Cloud, Layers, Box } from "lucide-react";
+import { Code, Database, Globe, Cpu, Server, Terminal, Cloud, Layers, Box, Smartphone } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function TechBackground() {
-  const [isMounted, setIsMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // We wait for mount to avoid hydration mismatch errors with random values
   useEffect(() => {
-    setIsMounted(true);
+    setMounted(true);
   }, []);
 
-  if (!isMounted) return null;
+  if (!mounted) return null;
 
-  // Configuration for the falling icons
-  const icons = [
-    Code, Database, Globe, Cpu, Server, Terminal, Smartphone, Cloud, Layers, Box
-  ];
+  const icons = [Code, Database, Globe, Cpu, Server, Terminal, Cloud, Layers, Box, Smartphone];
 
-  // Create 20 falling items with random properties
-  const fallingItems = Array.from({ length: 20 }).map((_, i) => {
+  // Create 15 falling items
+  const fallingItems = Array.from({ length: 15 }).map((_, i) => {
     const Icon = icons[i % icons.length];
-    const randomLeft = Math.floor(Math.random() * 100); // 0% to 100%
-    const randomDuration = Math.floor(Math.random() * 20) + 10; // 10s to 30s
-    const randomDelay = Math.floor(Math.random() * 10); // 0s to 10s
-    const randomSize = Math.floor(Math.random() * 20) + 15; // 15px to 35px
-
     return {
       id: i,
       component: Icon,
-      left: `${randomLeft}%`,
-      duration: randomDuration,
-      delay: randomDelay,
-      size: randomSize,
+      left: Math.floor(Math.random() * 90) + 5, // 5% to 95%
+      duration: Math.floor(Math.random() * 15) + 10, // 10s - 25s fall time
+      delay: Math.floor(Math.random() * 5),
+      size: Math.floor(Math.random() * 20) + 20, // 20px - 40px
     };
   });
 
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-black">
-      {/* 1. STATIC STARS (Simple CSS dots) */}
-      <div className="absolute inset-0 opacity-40" 
-           style={{
-             backgroundImage: 'radial-gradient(white 1px, transparent 1px)',
-             backgroundSize: '50px 50px' 
-           }}>
-      </div>
+    <div className="fixed inset-0 z-0 overflow-hidden bg-black">
+      {/* Subtle Grid Pattern */}
+      <div 
+        className="absolute inset-0 opacity-20"
+        style={{
+            backgroundImage: `radial-gradient(#333 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+        }}
+      />
       
-      {/* 2. FALLING TECH ICONS */}
+      {/* Falling Icons */}
       {fallingItems.map((item) => (
         <motion.div
           key={item.id}
-          className="absolute text-blue-900/40" // Very subtle color
+          className="absolute text-gray-700" // Brighter gray so it's visible
           initial={{ y: -100, opacity: 0 }}
           animate={{ 
             y: "110vh", 
-            opacity: [0, 1, 1, 0], // Fade in, stay visible, fade out at bottom
-            rotate: 360 // Slow rotation
+            opacity: [0, 0.4, 0.4, 0], 
+            rotate: 360 
           }}
           transition={{
             duration: item.duration,
@@ -65,17 +57,15 @@ export default function TechBackground() {
             delay: item.delay,
           }}
           style={{
-            left: item.left,
-            width: item.size,
-            height: item.size,
+            left: `${item.left}%`,
           }}
         >
           <item.component size={item.size} />
         </motion.div>
       ))}
       
-      {/* 3. GRADIENT OVERLAY (To ensure text remains readable) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80"></div>
+      {/* Gradient Overlay for Apple-like Fade */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90 pointer-events-none" />
     </div>
   );
 }

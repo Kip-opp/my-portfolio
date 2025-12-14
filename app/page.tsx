@@ -1,158 +1,136 @@
+"use client";
 import ProjectCard from './components/ProjectCard';
-import TechBackground from './components/TechBackground'; // <--- IMPORT THIS
-import { Github, Linkedin, Mail, Terminal, Cpu, Zap, ArrowRight } from 'lucide-react';
+import Spotlight from './components/Spotlight'; // Import the new Spotlight
+import TechBackground from './components/TechBackground'; // Keep the falling tech too if you want, or remove it for cleaner look.
+import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-gray-100 selection:bg-blue-500 selection:text-white relative">
+    <main className="min-h-screen bg-[#050505] text-white selection:bg-blue-500 selection:text-white font-sans overflow-x-hidden">
       
-      {/* THE BACKGROUND COMPONENT */}
-      <TechBackground />
+      {/* 1. LAYERS OF BACKGROUND */}
+      <div className="fixed inset-0 z-0">
+         <TechBackground /> {/* Falling Icons */}
+         <Spotlight />      {/* Mouse Follower */}
+      </div>
 
-      {/* CONTENT WRAPPER - VERY IMPORTANT */}
-      {/* This 'relative z-10' ensures your text floats ABOVE the stars */}
-      <div className="relative z-10">
+      {/* 2. MAIN CONTENT */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         
-        {/* Hero Section */}
-        <section className="max-w-4xl mx-auto pt-24 pb-12 px-6">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            Denis Kipruto
-          </h1>
-          {/* ... REST OF YOUR CODE (Hero text, Social Links) ... */}
-          <p className="text-xl text-gray-400 mb-8 max-w-2xl">
-          Full Stack Developer & AI Engineer. I don't just write code—I ship products.
-        </p>
-        
-        {/* Social Links */}
-        <div className="flex gap-6 mb-12">
-          <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" className="hover:text-blue-400 transition">
-            <Github size={24} />
-          </a>
-          <a href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" className="hover:text-blue-400 transition">
-            <Linkedin size={24} />
-          </a>
-          <a href="mailto:denis.dev.ke@gmail.com" className="hover:text-blue-400 transition">
-            <Mail size={24} />
-          </a>
-        </div>
+        {/* HERO SECTION (Screen Height) */}
+        <section className="h-screen flex flex-col justify-center items-start pt-20">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+                <div className="inline-block px-3 py-1 mb-6 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-mono backdrop-blur-md">
+                    ● Available for hire
+                </div>
+                <h1 className="text-7xl md:text-9xl font-bold tracking-tighter mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-600 bg-clip-text text-transparent">
+                  DENIS.<br/>KIPRUTO.
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed mb-10">
+                  Full Stack Engineer & AI Specialist. <br/>
+                  I build <span className="text-white font-semibold">autonomous agents</span> and <span className="text-white font-semibold">RAG systems</span> that solve expensive problems.
+                </p>
+
+                <div className="flex gap-6">
+                    <SocialBtn href="https://github.com/YOUR_USERNAME" icon={<Github />} />
+                    <SocialBtn href="https://linkedin.com/in/YOUR_USERNAME" icon={<Linkedin />} />
+                    <SocialBtn href="mailto:denis.dev.ke@gmail.com" icon={<Mail />} />
+                </div>
+            </motion.div>
+
+            {/* Scroll Indicator */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, y: [0, 10, 0] }}
+              transition={{ delay: 2, duration: 2, repeat: Infinity }}
+              className="absolute bottom-10 left-6 md:left-auto text-gray-500 flex flex-col items-center gap-2"
+            >
+                <span className="text-xs uppercase tracking-widest">Scroll</span>
+                <ArrowDown size={16} />
+            </motion.div>
         </section>
 
-        {/* Why Hire Me Section */}
-        <section className="max-w-4xl mx-auto px-6 mb-20">
-             {/* ... PASTE YOUR "WHY HIRE ME" CODE HERE ... */}
-             <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 md:p-10 backdrop-blur-sm"> 
-             {/* Added backdrop-blur-sm above to make text pop against moving background */}
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Terminal className="text-blue-500" />
-                    Why Hire Me?
-                </h2>
-                <div className="space-y-4 text-gray-300 leading-relaxed">
-                    <p>
-                    I am a <strong className="text-white">Junior Developer with a bias for action.</strong> 
-                    While many peers are stuck in "tutorial hell," I am out here building and shipping 
-                    complex applications like RAG systems and autonomous scrapers.
-                    </p>
-                    <p>
-                    I am hungry to learn, I am not afraid to break things to understand how they work, 
-                    and I am looking for a team where I can get my hands dirty immediately.
-                    </p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                    <div className="bg-black/40 p-4 rounded-lg border border-gray-800">
-                    <div className="flex items-center gap-2 mb-2 text-blue-400 font-bold">
-                        <Zap size={18} /> Speed
-                    </div>
-                    <p className="text-sm text-gray-500">I move fast. From idea to deployment in days, not months.</p>
-                    </div>
-                    <div className="bg-black/40 p-4 rounded-lg border border-gray-800">
-                    <div className="flex items-center gap-2 mb-2 text-purple-400 font-bold">
-                        <Cpu size={18} /> AI Native
-                    </div>
-                    <p className="text-sm text-gray-500">I don't just use APIs; I build agents, scrapers, and RAG pipelines.</p>
-                    </div>
-                    <div className="bg-black/40 p-4 rounded-lg border border-gray-800">
-                    <div className="flex items-center gap-2 mb-2 text-green-400 font-bold">
-                        <Terminal size={18} /> Grit
-                    </div>
-                    <p className="text-sm text-gray-500">I debug until it works. I don't stop at the first error message.</p>
-                    </div>
-                </div>
-                </div>
+        {/* SKILLS MARQUEE (A Strip of tech) */}
+        <section className="py-20 border-y border-white/5 bg-black/20 backdrop-blur-sm">
+             <div className="flex justify-between md:justify-around text-gray-500 font-bold text-xl md:text-3xl select-none opacity-50">
+                 <span>NEXT.JS 14</span>
+                 <span>PYTHON</span>
+                 <span>LANGCHAIN</span>
+                 <span>SUPABASE</span>
+                 <span>TAILWIND</span>
+             </div>
         </section>
 
-        {/* Projects Section */}
-        <section className="max-w-4xl mx-auto pb-20 px-6">
-          <h2 className="text-3xl font-bold mb-12 border-b border-gray-800 pb-4">Featured Applications</h2>
-          <div className="grid md:grid-cols-1 gap-10">
-             {/* ... PASTE YOUR PROJECT CARDS HERE ... */}
-            <ProjectCard 
-            title="Omnibrain: Enterprise Document Intelligence"
-            description="A Retrieval-Augmented Generation (RAG) system that transforms static documents into interactive knowledge bases. Users upload proprietary PDFs or docs, and the AI indexes the content for precise Q&A."
-            tags={['Next.js 14', 'RAG Pipeline', 'Vector Database', 'Vercel']}
-            githubLink="https://github.com/YOUR_USERNAME/omnibrain"
-            liveLink="https://omnibrain-v1-qfbrh63ad-denis-projects-3311cb8d.vercel.app"
-            image="/omnibrain.png" 
-          />
-
+        {/* SELECTED WORKS (The Alternating Layout) */}
+        <section className="py-32">
+          <h2 className="text-sm font-mono text-blue-400 mb-20 tracking-widest uppercase">/ Selected Works</h2>
           
+          <div className="flex flex-col">
+            
+            {/* PROJECT 1 (Left Image) */}
             <ProjectCard 
-            title="Autonomous Lead & Data Scraper"
-            description="A high-velocity prospecting engine. It autonomously scans target websites to extract high-value contact details—emails, phone numbers, and business leads."
-            tags={['Python', 'Streamlit', 'Web Scraping', 'Data Mining']}
-            githubLink="https://github.com/YOUR_USERNAME/lead-scraper"
-            liveLink="https://lead-scrappergit-dqouwxzdgeyrewjhqqcy9v.streamlit.app/"
-            image="/scraper.png"
-          />
+              align="left"
+              title="Omnibrain"
+              description="An Enterprise-grade RAG system that indexes complex PDFs into vector databases. It allows companies to chat with their documentation with zero hallucinations. Built with Next.js, Pinecone, and OpenAI."
+              tags={['Next.js', 'Vector DB', 'LangChain', 'AI Engineering']}
+              githubLink="https://github.com/YOUR_USERNAME/omnibrain"
+              liveLink="https://omnibrain-v1-qfbrh63ad-denis-projects-3311cb8d.vercel.app"
+              image="/omnibrain.png" 
+            />
 
-          <ProjectCard 
-            title="Career OS: Smart Resume Optimizer"
-            description="An AI-powered career accelerator that bridges the gap between candidates and ATS algorithms. By analyzing specific job descriptions, it regenerates targeted resumes."
-            tags={['Python', 'Streamlit', 'LLM Engineering', 'Prompt Engineering']}
-            githubLink="https://github.com/YOUR_USERNAME/career-os"
-            liveLink="https://career-os-dcpgmvkhbl7zggmsxhmyev.streamlit.app/"
-            image="/careeros.png"
-          />
+            {/* PROJECT 2 (Right Image) */}
+            <ProjectCard 
+              align="right"
+              title="Career OS"
+              description="A SaaS-ready career acceleration tool. It uses LLMs to analyze job descriptions and rewrite resumes instantly. Features a custom PDF generation engine with multiple visual templates."
+              tags={['Python', 'Streamlit', 'OpenAI', 'PDF Generation']}
+              githubLink="https://github.com/YOUR_USERNAME/career-os"
+              liveLink="https://career-helper-app-link.streamlit.app" 
+              image="/careeros.png"
+            />
+
+            {/* PROJECT 3 (Left Image) */}
+            <ProjectCard 
+              align="left"
+              title="Lead Scraper"
+              description="Autonomous prospecting engine. It scrapes high-value leads from target websites, bypasses anti-bot protections, and structures the data for sales teams. Replaces hours of manual data entry."
+              tags={['Python', 'Automation', 'Data Mining', 'Puppeteer']}
+              githubLink="https://github.com/YOUR_USERNAME/lead-scraper"
+              liveLink="https://lead-scrappergit-dqouwxzdgeyrewjhqqcy9v.streamlit.app/"
+              image="/scraper.png"
+            />
+
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section className="max-w-4xl mx-auto px-6 mb-32">
-             {/* ... PASTE YOUR CONTACT SECTION HERE ... */}
-             <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-900/50 rounded-2xl p-12 text-center backdrop-blur-sm">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to start immediately.</h2>
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-                I am currently looking for a full-time Junior Developer role. 
-                If you need someone who can jump in and start shipping code on Day 1, let's talk.
-            </p>
-            
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-                <a 
-                href="mailto:denis.dev.ke@gmail.com" 
-                className="flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition"
-                >
-                <Mail size={20} />
-                Email Me: denis.dev.ke@gmail.com
-                </a>
-                
-                <a 
-                href="https://github.com/YOUR_GITHUB_USERNAME" 
-                target="_blank"
-                className="flex items-center gap-2 px-8 py-4 rounded-full font-bold border border-gray-700 hover:border-white transition text-white"
-                >
-                <Github size={20} />
-                Check my Code
-                </a>
-            </div>
-            </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="py-8 text-center text-gray-600 text-sm border-t border-gray-900/50">
-          © {new Date().getFullYear()} Denis Kipruto. Built with Next.js & Tailwind.
+        {/* FOOTER */}
+        <footer className="pb-20 pt-32 text-center">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Let's build something.</h2>
+            <a href="mailto:denis.dev.ke@gmail.com" className="inline-block bg-white text-black px-10 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+                Get in Touch
+            </a>
+            <p className="mt-12 text-gray-600 text-sm">© 2025 Denis Kipruto.</p>
         </footer>
-      
+
       </div>
     </main>
   );
+}
+
+// Simple helper component for social buttons
+function SocialBtn({ href, icon }: { href: string, icon: React.ReactNode }) {
+    return (
+        <a 
+            href={href} 
+            target="_blank" 
+            className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-white hover:text-black transition-all duration-300"
+        >
+            {icon}
+        </a>
+    )
 }
