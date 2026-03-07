@@ -1,8 +1,8 @@
 # Denis Kipruto | Full Stack Engineer & AI Specialist
 
-A modern, interactive portfolio website built with Next.js 14, featuring AI-powered chat functionality, smooth animations, and a responsive design tailored for recruiters and clients.
+A modern, interactive portfolio website built with Next.js 14, featuring AI-powered chat functionality, smooth animations, and a responsive design showcasing AI engineering expertise and full-stack development projects.
 
-![Portfolio Preview](./public/og-image.png)
+![Portfolio Preview](./public/image.png)
 
 ## 🚀 Features
 
@@ -17,11 +17,11 @@ A modern, interactive portfolio website built with Next.js 14, featuring AI-powe
 
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS
+- **Styling:** CSS Modules + Custom CSS Variables
 - **Animations:** Framer Motion
 - **Icons:** Lucide React
 - **AI:** OpenAI API (GPT-3.5 Turbo)
-- **Fonts:** Inter (via next/font)
+- **Fonts:** Space Grotesk (via next/font)
 
 ## 📁 Project Structure
 
@@ -33,16 +33,18 @@ my-portfolio/
 │   │       └── route.ts        # AI Chat API endpoint
 │   ├── components/
 │   │   ├── ChatWidget.tsx      # AI Chat widget
+│   │   ├── Navbar.tsx          # Navigation bar
 │   │   ├── ProjectCard.tsx     # Project showcase card
 │   │   ├── Spotlight.tsx       # Mouse follower effect
-│   │   └── TechBackground.tsx  # Animated tech icons
-│   ├── globals.css             # Global styles
+│   │   ├── TechBackground.tsx # Animated tech icons
+│   │   └── TypewriterText.tsx  # Typewriter animation
+│   ├── globals.css             # Global styles with CSS variables
 │   ├── layout.tsx              # Root layout
 │   └── page.tsx                # Home page
-├── public/                     # Static assets
+├── public/                     # Static assets (images, icons)
 ├── .env.local                  # Environment variables
 ├── next.config.ts              # Next.js configuration
-├── tailwind.config.ts          # Tailwind CSS configuration
+├── postcss.config.mjs          # PostCSS configuration
 └── tsconfig.json               # TypeScript configuration
 ```
 
@@ -94,26 +96,21 @@ my-portfolio/
 ### Customization
 
 - **Projects:** Edit [`app/page.tsx`](app/page.tsx) to update project cards
-- **Skills:** Update the marquee section in [`app/page.tsx`](app/page.tsx)
+- **Skills:** Update the `skills` array in [`app/page.tsx`](app/page.tsx)
 - **AI Persona:** Modify the system prompt in [`app/api/chat/route.ts`](app/api/chat/route.ts)
-- **Styling:** Customize Tailwind config and [`app/globals.css`](app/globals.css)
+- **Styling:** Customize CSS variables in [`app/globals.css`](app/globals.css)
 
-## 📱 Features Breakdown
+## 💼 Services
 
-### AI Chat Widget
-- Located in [`app/components/ChatWidget.tsx`](app/components/ChatWidget.tsx)
-- Powered by OpenAI GPT-3.5 Turbo
-- Context-aware responses about skills and projects
-- Error handling with fallback messages
+- **AI & RAG Systems** - Enterprise-grade retrieval-augmented generation pipelines with zero hallucinations
+- **Full Stack Development** - End-to-end web applications with Next.js, TypeScript, and scalable backends
+- **Autonomous Agents** - LLM-powered agents that automate complex workflows and replace manual processes
 
-### Animated Backgrounds
-- **Spotlight:** Mouse-following gradient effect ([`app/components/Spotlight.tsx`](app/components/Spotlight.tsx))
-- **Tech Icons:** Falling tech-related icons ([`app/components/TechBackground.tsx`](app/components/TechBackground.tsx))
+## 📂 Projects
 
-### Project Cards
-- Staggered fade-in animations
-- Interactive hover states
-- Live demo and GitHub links
+- **Omnibrain** - Enterprise-grade RAG system that indexes complex PDFs into vector databases. Built with Next.js, Pinecone, and OpenAI.
+- **Career OS** - SaaS-ready career acceleration tool that uses LLMs to analyze job descriptions and rewrite resumes with custom PDF generation.
+- **Lead Scraper** - Autonomous prospecting engine that scrapes high-value leads from target websites and structures data for sales teams.
 
 ## 🚀 Deployment
 
@@ -137,10 +134,9 @@ MIT License - feel free to use this template for your own portfolio.
 
 ## 🤝 Connect
 
-- **GitHub:** [github.com/YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- **LinkedIn:** [linkedin.com/in/YOUR_USERNAME](https://linkedin.com/in/YOUR_USERNAME)
+- **GitHub:** [github.com/Kip-opp](https://github.com/Kip-opp)
 - **Email:** denis.dev.ke@gmail.com
 
 ---
 
-Built with ❤️ using Next.js and Tailwind CSS
+Built with ❤️ using Next.js, Framer Motion, and OpenAI
