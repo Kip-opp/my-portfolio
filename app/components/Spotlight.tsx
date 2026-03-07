@@ -6,28 +6,23 @@ export default function Spotlight() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current) return;
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => setPosition({ x: e.clientX, y: e.clientY });
+    const handleMouseEnter = () => setOpacity(1);
+    const handleMouseLeave = () => setOpacity(0);
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
 
   return (
-    <div
-      ref={divRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setOpacity(1)}
-      onMouseLeave={() => setOpacity(0)}
-      className="fixed inset-0 z-0 overflow-hidden"
-    >
-      <div
-        className="pointer-events-none absolute -inset-px transition duration-300"
-        style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
-        }}
-      />
+    <div ref={divRef} className="fixed inset-0 z-10 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 transition-opacity duration-500" style={{ opacity, background: `radial-gradient(700px circle at ${position.x}px ${position.y}px, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.06) 40%, transparent 70%)` }} />
     </div>
   );
 }

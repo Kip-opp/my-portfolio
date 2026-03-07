@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Denis Kipruto | Full Stack Engineer & AI Specialist
 
-## Getting Started
+A modern, interactive portfolio website built with Next.js 14, featuring AI-powered chat functionality, smooth animations, and a responsive design tailored for recruiters and clients.
 
-First, run the development server:
+![Portfolio Preview](./public/og-image.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- **Interactive Hero Section** - Animated spotlight effects and falling tech icons
+- **AI Chat Assistant** - OpenAI-powered chatbot to answer questions about skills and projects
+- **Project Showcase** - Animated project cards with hover effects and live/demo links
+- **Responsive Design** - Optimized for all screen sizes
+- **Performance Optimized** - Built with Next.js 14 App Router and modern best practices
+- **TypeScript** - Full type safety across the codebase
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **AI:** OpenAI API (GPT-3.5 Turbo)
+- **Fonts:** Inter (via next/font)
+
+## 📁 Project Structure
+
+```
+my-portfolio/
+├── app/
+│   ├── api/
+│   │   └── chat/
+│   │       └── route.ts        # AI Chat API endpoint
+│   ├── components/
+│   │   ├── ChatWidget.tsx      # AI Chat widget
+│   │   ├── ProjectCard.tsx     # Project showcase card
+│   │   ├── Spotlight.tsx       # Mouse follower effect
+│   │   └── TechBackground.tsx  # Animated tech icons
+│   ├── globals.css             # Global styles
+│   ├── layout.tsx              # Root layout
+│   └── page.tsx                # Home page
+├── public/                     # Static assets
+├── .env.local                  # Environment variables
+├── next.config.ts              # Next.js configuration
+├── tailwind.config.ts          # Tailwind CSS configuration
+└── tsconfig.json               # TypeScript configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js 18.17 or later
+- npm, yarn, pnpm, or bun
+- OpenAI API key (for AI chat functionality)
 
-## Learn More
+### Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd my-portfolio
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Add your OpenAI API key to `.env.local`:
+   ```env
+   OPENAI_API_KEY=sk-your-api-key-here
+   ```
 
-## Deploy on Vercel
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔧 Configuration
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | OpenAI API key for AI chat | Yes |
+
+### Customization
+
+- **Projects:** Edit [`app/page.tsx`](app/page.tsx) to update project cards
+- **Skills:** Update the marquee section in [`app/page.tsx`](app/page.tsx)
+- **AI Persona:** Modify the system prompt in [`app/api/chat/route.ts`](app/api/chat/route.ts)
+- **Styling:** Customize Tailwind config and [`app/globals.css`](app/globals.css)
+
+## 📱 Features Breakdown
+
+### AI Chat Widget
+- Located in [`app/components/ChatWidget.tsx`](app/components/ChatWidget.tsx)
+- Powered by OpenAI GPT-3.5 Turbo
+- Context-aware responses about skills and projects
+- Error handling with fallback messages
+
+### Animated Backgrounds
+- **Spotlight:** Mouse-following gradient effect ([`app/components/Spotlight.tsx`](app/components/Spotlight.tsx))
+- **Tech Icons:** Falling tech-related icons ([`app/components/TechBackground.tsx`](app/components/TechBackground.tsx))
+
+### Project Cards
+- Staggered fade-in animations
+- Interactive hover states
+- Live demo and GitHub links
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Connect your repo to [Vercel](https://vercel.com)
+3. Add `OPENAI_API_KEY` in Vercel environment variables
+4. Deploy!
+
+### Other Platforms
+
+```bash
+npm run build
+npm start
+```
+
+## 📄 License
+
+MIT License - feel free to use this template for your own portfolio.
+
+## 🤝 Connect
+
+- **GitHub:** [github.com/YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+- **LinkedIn:** [linkedin.com/in/YOUR_USERNAME](https://linkedin.com/in/YOUR_USERNAME)
+- **Email:** denis.dev.ke@gmail.com
+
+---
+
+Built with ❤️ using Next.js and Tailwind CSS

@@ -1,10 +1,6 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 const SYSTEM_PROMPT = `
 You are the AI Assistant for Denis Kipruto's portfolio website.
 Your goal is to impress recruiters and answer questions about Denis's skills and projects.
@@ -25,23 +21,53 @@ Keep answers short (under 3 sentences) unless asked for detail.
 `;
 
 export async function POST(req: Request) {
+  // Check for API key
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    console.error('[Chat] OpenAI API key not configured');
+    return NextResponse.json({ error: 'Service unavailable' }, { status: 503 });
+  }
+
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    
+    // Validate messages array
+    if (!body.messages || !Array.isArray(body.messages)) {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+    }
+
+    // Limit message history to prevent cost explosion
+    const recentMessages = body.messages.slice(-10);
+
+    // Initialize OpenAI inside handler (prevents serverless cold start issues)
+    const openai = new OpenAI({ apiKey });
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // Fast and cheap
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
-        ...messages
+        ...recentMessages,
       ],
+      max_tokens: 150, // Prevent long responses
     });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error('Empty response from OpenAI');
+    }
 
     return NextResponse.json({ 
       role: 'assistant', 
-      content: response.choices[0].message.content 
+      content 
     });
 
   } catch (error) {
-    return NextResponse.json({ error: 'Error processing request' }, { status: 500 });
+    console.error("[Chat Error]:", error);
+    
+    if (error instanceof OpenAI.APIError) {
+      return NextResponse.json({ error: 'AI service error' }, { status: 502 });
+    }
+    
+    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
   }
 }
