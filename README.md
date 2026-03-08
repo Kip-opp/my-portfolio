@@ -60,7 +60,7 @@ my-portfolio/
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
+   git clone git@github.com:Kip-opp/my-portfolio.git
    cd my-portfolio
    ```
 
