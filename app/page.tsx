@@ -1,12 +1,29 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
+import dynamic from 'next/dynamic';
 import ProjectCard from './components/ProjectCard';
-import Spotlight from './components/Spotlight';
-import TechBackground from './components/TechBackground';
+import BentoGrid from './components/BentoGrid';
+import ScrollReveal from './components/ScrollReveal';
 import Navbar from './components/Navbar';
 import TypewriterText from './components/TypewriterText';
 import { Github, Linkedin, Mail, ArrowDown, ArrowUpRight, Sparkles, Code2, Brain, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+// Lazy load heavy visual components for better initial load time
+const AuroraBackground = dynamic(() => import('./components/AuroraBackground'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const Spotlight = dynamic(() => import('./components/Spotlight'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const AnimatedShape = dynamic(() => import('./components/SplineViewer').then(mod => ({ default: mod.AnimatedShape })), {
+  ssr: false,
+  loading: () => null,
+});
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -17,8 +34,8 @@ const skills = [
 ];
 
 const stats = [
-  { value: '3+', label: 'Years Experience' },
-  { value: '15+', label: 'Projects Shipped' },
+  { value: '1+', label: 'Years Experience' },
+  { value: '10+', label: 'Projects Shipped' },
   { value: '5+', label: 'AI Systems Built' },
   { value: '100%', label: 'Client Satisfaction' },
 ];
@@ -90,12 +107,12 @@ const fadeUp = {
 export default function Home() {
   return (
     <main
-      className="min-h-screen text-white overflow-x-hidden"
-      style={{ background: '#030712', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}
+      className="min-h-screen overflow-x-hidden"
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}
     >
       {/* ── Background layers ── */}
       <div className="fixed inset-0 z-0">
-        <TechBackground />
+        <AuroraBackground />
         <Spotlight />
       </div>
 
@@ -108,25 +125,17 @@ export default function Home() {
         {/* ════════════════════════════════════════
             HERO
         ════════════════════════════════════════ */}
-        <section id="about" className="min-h-screen flex flex-col justify-center pt-24 pb-16">
+        <section id="about" className="min-h-screen flex flex-col justify-center pt-24 pb-16 relative">
+          {/* 3D Animated Shape */}
+          <AnimatedShape />
+          
+          <ScrollReveal direction="up" delay={0.2}>
           <motion.div
             initial="hidden"
             animate="show"
             variants={{ show: { transition: { staggerChildren: 0.12 } } }}
           >
-            {/* Badge */}
-            <motion.div variants={fadeUp}>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full text-sm font-mono"
-                style={{
-                  background: 'rgba(99,102,241,0.1)',
-                  border: '1px solid rgba(99,102,241,0.3)',
-                  color: '#a5b4fc',
-                }}
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Available for hire
-              </div>
-            </motion.div>
+
 
             {/* Name */}
             <motion.h1
@@ -188,6 +197,7 @@ KIPRUTO.
               </div>
             </motion.div>
           </motion.div>
+          </ScrollReveal>
 
           {/* Scroll indicator */}
           <motion.div
@@ -211,13 +221,13 @@ KIPRUTO.
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-2xl overflow-hidden"
-            style={{ border: '1px solid rgba(255,255,255,0.06 )', background: 'rgba(255,255,255,0.06)' }}
+            style={{ border: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}
           >
             {stats.map((s, i) => (
               <div
                 key={i}
                 className="flex flex-col items-center justify-center py-10 px-6 text-center"
-                style={{ background: '#030712' }}
+                style={{ background: 'var(--bg-primary)' }}
               >
                 <span
                   className="text-4xl md:text-5xl font-bold mb-2"
@@ -230,54 +240,21 @@ KIPRUTO.
                 >
                   {s.value}
                 </span>
-                <span className="text-sm text-gray-500 font-medium">{s.label}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>{s.label}</span>
               </div>
             ))}
           </motion.div>
         </section>
 
         {/* ════════════════════════════════════════
-            SERVICES
+            SERVICES - BENTO GRID
         ════════════════════════════════════════ */}
         <section id="skills" className="py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-14"
-          >
+          <ScrollReveal direction="up" delay={0.1}>
             <p className="font-mono text-xs text-indigo-400 tracking-widest uppercase mb-3">/ What I Do</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Services & Expertise</h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {services.map((s, i) => (
-              <motion.div
-                key={i}
-                custom={i}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="p-6 rounded-2xl group hover:border-indigo-500/30 transition-all duration-300"
-                style={{
-                  background: 'rgba(255,255,255,0.02)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 text-indigo-400"
-                  style={{ background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)' }}
-                >
-                  {s.icon}
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{s.description}</p>
-              </motion.div>
-            ))}
-          </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-14">Services & Expertise</h2>
+          </ScrollReveal>
+          <BentoGrid />
         </section>
 
         {/* ════════════════════════════════════════
@@ -287,15 +264,16 @@ KIPRUTO.
           <div
             className="py-6 rounded-2xl overflow-hidden"
             style={{
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              background: 'var(--bg-secondary)',
+              border: '1px solid var(--border-color)',
             }}
           >
             <div className="flex animate-marquee whitespace-nowrap">
               {[...skills, ...skills].map((skill, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-2 mx-6 text-sm font-mono font-medium text-gray-500 hover:text-indigo-400 transition-colors cursor-default"
+                  className="inline-flex items-center gap-2 mx-6 text-sm font-mono font-medium transition-colors cursor-default"
+                  style={{ color: 'var(--text-muted)' }}
                 >
                   <span className="w-1 h-1 rounded-full bg-indigo-500/50" />
                   {skill}
@@ -338,8 +316,8 @@ KIPRUTO.
             transition={{ duration: 0.7 }}
             className="relative rounded-3xl overflow-hidden p-12 md:p-20 text-center"
             style={{
-              background: 'rgba(99,102,241,0.05)',
-              border: '1px solid rgba(99,102,241,0.15)',
+              background: 'var(--bg-accent)',
+              border: '1px solid var(--border-accent)',
             }}
           >
             {/* Glow */}
@@ -351,17 +329,9 @@ KIPRUTO.
             />
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full text-xs font-mono"
-                style={{
-                  background: 'rgba(99,102,241,0.1)',
-                  border: '1px solid rgba(99,102,241,0.3)',
-                  color: '#a5b4fc',
-                }}
-              >
-                <span className="flex items-center gap-1"><Sparkles size={12} /> Open to opportunities</span>
-              </div>
 
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+
+              <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight" style={{ color: 'var(--text-primary)' }}>
                 Let's build something  
 
                 <span style={{
@@ -372,7 +342,7 @@ KIPRUTO.
                 }}>remarkable.</span>
               </h2>
 
-              <p className="text-gray-400 mb-10 max-w-md mx-auto text-lg">
+              <p className="mb-10 max-w-md mx-auto text-lg" style={{ color: 'var(--text-secondary)' }}>
                 Have a project in mind or want to discuss AI solutions? I'd love to hear from you.
               </p>
 
@@ -422,14 +392,14 @@ function SocialBtn({ href, icon, label }: { href: string; icon: React.ReactNode;
       aria-label={label}
       className="p-2.5 rounded-full transition-all duration-200 hover:scale-110"
       style={{
-        background: 'rgba(255,255,255,0.05)',
-        border: '1px solid rgba(255,255,255,0.1)',
-        color: '#9ca3af',
+        background: 'var(--bg-secondary)',
+        border: '1px solid var(--border-color)',
+        color: 'var(--text-secondary)',
       }}
       onMouseEnter={e => {
-        (e.currentTarget as HTMLElement).style.background = 'rgba(99,102,241,0.15)';
-        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(99,102,241,0.4)';
-        (e.currentTarget as HTMLElement).style.color = '#a5b4fc';
+        (e.currentTarget as HTMLElement).style.background = 'var(--bg-accent)';
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-accent)';
+        (e.currentTarget as HTMLElement).style.color = 'var(--text-accent)';
       }}
       onMouseLeave={e => {
         (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)';
