@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
+import { Sun, Moon } from "lucide-react";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -11,12 +12,26 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState('dark');
   const { scrollY } = useScroll();
 
   useEffect(() => {
     const unsub = scrollY.on("change", (v) => setScrolled(v > 50));
     return () => unsub();
   }, [scrollY]);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   return (
     <motion.nav
@@ -39,10 +54,15 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-white/10 transition-colors duration-200"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
         </div>
-        <a href="mailto:denis.dev.ke@gmail.com" className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25">
-          Hire Me
-        </a>
+
       </div>
     </motion.nav>
   );
