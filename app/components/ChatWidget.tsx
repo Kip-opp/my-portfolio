@@ -22,11 +22,37 @@ export default function ChatWidget() {
     setInput("");
     setIsLoading(true);
     try {
-      const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: [...messages, userMsg] }) });
-      const data = await res.json();
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [...messages, userMsg] })
+      });
+      
+      // Check for HTTP errors
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
+      // Try to parse JSON with error handling
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error('Invalid JSON response');
+      }
+      
+      // Handle API errors in response
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
       setMessages(prev => [...prev, { role: 'assistant', content: data.content }]);
-    } catch { setMessages(prev => [...prev, { role: 'assistant', content: "I'm offline right now, but you can email Denis directly!" }]); }
-    finally { setIsLoading(false); }
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { role: 'assistant', content: "I'm offline right now, but you can email Denis directly!" }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
