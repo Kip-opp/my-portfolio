@@ -2,7 +2,7 @@
 
 A modern, interactive portfolio website built with Next.js 14, featuring AI-powered chat functionality, smooth animations, and a responsive design showcasing AI engineering expertise and full-stack development projects.
 
-![Portfolio Preview](./public/image.png)
+
 
 ## 🚀 Features
 
