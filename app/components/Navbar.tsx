@@ -8,23 +8,24 @@ const navLinks = [
   { label: "Work", href: "#work" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
+  { label: "Blog", href: "contact"},
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') || 'dark' : 'dark';
+    if (typeof window !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+    return savedTheme;
+  });
   const { scrollY } = useScroll();
 
   useEffect(() => {
     const unsub = scrollY.on("change", (v) => setScrolled(v > 50));
     return () => unsub();
   }, [scrollY]);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -40,23 +41,23 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "py-3 bg-[#030712]/80 backdrop-blur-xl border-b border-white/5 shadow-xl shadow-black/20"
+          ? "py-3 bg-[var(--bg-nav)] backdrop-blur-xl border-b border-[var(--border-color)] shadow-xl shadow-black/20"
           : "py-6 bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="font-mono text-sm font-bold text-white tracking-widest uppercase hover:text-indigo-400 transition-colors">
+        <a href="#" className="font-mono text-sm font-bold text-[var(--text-primary)] tracking-widest uppercase hover:text-indigo-400 transition-colors">
           DK<span className="text-indigo-500">.</span>
         </a>
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a key={link.label} href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors duration-200 font-medium tracking-wide">
+            <a key={link.label} href={link.href} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200 font-medium tracking-wide">
               {link.label}
             </a>
           ))}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-white/10 transition-colors duration-200"
+            className="p-2 rounded-full hover:bg-[var(--bg-secondary)] transition-colors duration-200"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
