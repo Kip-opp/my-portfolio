@@ -61,10 +61,10 @@ export default function ChatWidget() {
         {isOpen && (
           <motion.div initial={{ opacity: 0, y: 16, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.95 }} transition={{ duration: 0.2, ease: "easeOut" }} className="mb-4 w-[340px] rounded-2xl flex flex-col overflow-hidden h-[480px] shadow-2xl" style={{ background: 'rgba(10, 10, 20, 0.95)', backdropFilter: 'blur(20px)', border: '1px solid rgba(99,102,241,0.2)' }}>
             <div className="p-4 flex justify-between items-center" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center"><Bot size={16} className="text-white" /></div>
-                <div><p className="text-white text-sm font-semibold">Denis's AI</p><div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /><span className="text-xs text-gray-500">Online</span></div></div>
-              </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center"><Bot size={16} className="text-white" /></div>
+                    <div><p className="text-white text-sm font-semibold">Denis's AI</p><div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /><span className="text-xs text-gray-500">Online</span></div></div>
+                  </div>
               <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/5"><X size={16} /></button>
             </div>
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3" style={{ background: 'rgba(0,0,0,0.3)' }}>
