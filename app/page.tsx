@@ -35,9 +35,9 @@ const skills = [
 
 const stats = [
   { value: '1+', label: 'Years Experience' },
-  { value: '10+', label: 'Projects Shipped' },
-  { value: '5+', label: 'AI Systems Built' },
-  { value: '100%', label: 'Client Satisfaction' },
+  { value: '3+', label: 'Projects Shipped' },
+  { value: '3+', label: 'AI Systems Built' },
+  { value: '70%+', label: 'Client Satisfaction'}
 ];
 
 const services = [
@@ -61,13 +61,13 @@ const services = [
 const projects = [
   {
     align: 'left' as const,
-    title: 'Omnibrain',
+    title: 'Lumina',
     description:
-      'An Enterprise-grade RAG system that indexes complex PDFs into vector databases. It allows companies to chat with their documentation with zero hallucinations. Built with Next.js, Pinecone, and OpenAI.',
-    tags: ['Next.js', 'Vector DB', 'LangChain', 'AI Engineering'],
-    githubLink: 'https://github.com/Kip-opp/omnibrain',
-    liveLink: 'https://omnibrain-v1-qfbrh63ad-denis-projects-3311cb8d.vercel.app',
-    image: '/omnibrain.png',
+      'A web-based writing assistant that harnesses the power of Large Language Models (LLMs) to provide intelligent, context-aware writing feedback and enhancements. Built with modern web technologies, it offers real-time AI-driven analysis for grammar, style, clarity, and tone improvements, making it an indispensable tool for writers, professionals, and content creators.',
+    tags: ['Next.js', 'AI Engineering'],
+    githubLink: 'https://github.com/Kip-opp/lumina',
+    liveLink: 'lumina-zeta-swart.vercel.app',
+    image: '',
   },
   {
     align: 'right' as const,
@@ -160,11 +160,12 @@ KIPRUTO.
             {/* Description */}
             <motion.p
               variants={fadeUp}
-              className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed mb-10"
+              className="text-lg md:text-xl max-w-xl leading-relaxed mb-10"
+              style={{ color: 'var(--text-secondary)' }}
             >
               I build{' '}
-              <span className="text-white font-semibold">autonomous agents</span> and{' '}
-              <span className="text-white font-semibold">RAG systems</span> that solve expensive problems.
+              <span className="text-[var(--text-primary)] font-semibold">autonomous agents</span> and{' '}
+              <span className="text-[var(--text-primary)] font-semibold">RAG systems</span> that solve expensive problems.
               Turning complex AI into clean, production-ready software.
             </motion.p>
 
@@ -172,7 +173,7 @@ KIPRUTO.
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
               <a
                 href="#work"
-                className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white transition-all duration-200 hover:scale-105"
+                className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[var(--text-primary)] transition-all duration-200 hover:scale-105"
                 style={{
                   background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
                   boxShadow: '0 4px 24px rgba(99,102,241,0.35)',
@@ -182,7 +183,7 @@ KIPRUTO.
               </a>
               <a
                 href="mailto:denis.dev.ke@gmail.com"
-                className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-gray-300 hover:text-white transition-all duration-200"
+                className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-200"
                 style={{
                   background: 'rgba(255,255,255,0.05)',
                   border: '1px solid rgba(255,255,255,0.1)',
@@ -204,7 +205,8 @@ KIPRUTO.
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: [0, 8, 0] }}
             transition={{ delay: 2.5, duration: 2, repeat: Infinity }}
-            className="absolute bottom-10 left-6 text-gray-600 flex flex-col items-center gap-2"
+            className="absolute bottom-10 left-6 flex flex-col items-center gap-2"
+            style={{ color: 'var(--text-muted)' }}
           >
             <span className="text-[10px] uppercase tracking-widest font-mono">Scroll</span>
             <ArrowDown size={14} />
@@ -252,7 +254,7 @@ KIPRUTO.
         <section id="skills" className="py-20">
           <ScrollReveal direction="up" delay={0.1}>
             <p className="font-mono text-xs text-indigo-400 tracking-widest uppercase mb-3">/ What I Do</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-14">Services & Expertise</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-14">Services & Expertise</h2>
           </ScrollReveal>
           <BentoGrid />
         </section>
@@ -295,7 +297,7 @@ KIPRUTO.
             className="mb-20"
           >
             <p className="font-mono text-xs text-indigo-400 tracking-widest uppercase mb-3">/ Selected Works</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Things I've Built</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">Things I've Built</h2>
           </motion.div>
 
           <div className="flex flex-col">
@@ -349,7 +351,7 @@ KIPRUTO.
               <div className="flex flex-wrap justify-center gap-4">
                 <a
                   href="mailto:denis.dev.ke@gmail.com"
-                  className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white transition-all duration-200 hover:scale-105"
+                  className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-[var(--text-primary)] transition-all duration-200 hover:scale-105"
                   style={{
                     background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
                     boxShadow: '0 4px 32px rgba(99,102,241,0.4)',
@@ -360,7 +362,7 @@ KIPRUTO.
                 <a
                   href="https://github.com/Kip-opp"
                   target="_blank"
-                  className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-gray-300 hover:text-white transition-all duration-200"
+                  className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-200"
                   style={{
                     background: 'rgba(255,255,255,0.05 )',
                     border: '1px solid rgba(255,255,255,0.1)',
@@ -372,7 +374,7 @@ KIPRUTO.
             </div>
           </motion.div>
 
-          <p className="mt-12 text-center text-gray-700 text-sm font-mono">
+          <p className="mt-12 text-center text-sm font-mono" style={{ color: 'var(--text-muted)' }}>
             © 2025 Denis Kipruto — Built with Next.js & Tailwind CSS
           </p>
         </footer>
