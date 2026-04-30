@@ -17,6 +17,7 @@
   --bg-accent: rgba(99,102,241,0.1);
   --border-accent: rgba(99,102,241,0.3);
   --text-accent: #a5b4fc;
+  --bg-nav: rgba(3,7,18,0.8);
 }
 
 /* Light theme overrides */
@@ -30,6 +31,7 @@
   --bg-accent: rgba(99,102,241,0.05);
   --border-accent: rgba(99,102,241,0.2);
   --text-accent: #4f46e5;
+  --bg-nav: rgba(255,255,255,0.8);
 }
 
 * {
