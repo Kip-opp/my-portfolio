@@ -110,65 +110,65 @@ export default function AuroraBackground() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden" style={{ background: '#030712' }}>
+    <div className="fixed inset-0 z-0 overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
       {/* ── Grid Pattern ── */}
-      <div 
-        className="absolute inset-0" 
-        style={{ 
-          backgroundImage: `radial-gradient(rgba(99,102,241,0.12) 1px, transparent 1px)`, 
-          backgroundSize: '48px 48px' 
-        }} 
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `radial-gradient(var(--accent-glow) 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
       />
 
       {/* ── Aurora Blobs (Reduced from 3 to 2 for better performance) ── */}
       {!prefersReducedMotion && (
         <>
-          <motion.div 
+          <motion.div
             style={{ y: y1 }}
             className="absolute top-[-30%] left-[-15%] w-[800px] h-[800px] rounded-full pointer-events-none blur-[120px]"
           >
-            <div 
+            <div
               className="w-full h-full rounded-full"
-              style={{ 
-                background: 'radial-gradient(circle, rgba(99,102,241,0.25) 0%, rgba(139,92,246,0.15) 40%, transparent 70%)',
-              }} 
+              style={{
+                background: 'radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.05) 40%, transparent 70%)',
+              }}
             />
           </motion.div>
 
-          <motion.div 
+          <motion.div
             style={{ y: y2 }}
             className="absolute bottom-[-25%] right-[-15%] w-[700px] h-[700px] rounded-full pointer-events-none blur-[100px]"
           >
-            <div 
+            <div
               className="w-full h-full rounded-full"
-              style={{ 
-                background: 'radial-gradient(circle, rgba(139,92,246,0.2) 0%, rgba(99,102,241,0.12) 40%, transparent 70%)',
-              }} 
+              style={{
+                background: 'radial-gradient(circle, rgba(139,92,246,0.06) 0%, rgba(99,102,241,0.04) 40%, transparent 70%)',
+              }}
             />
           </motion.div>
 
-          <motion.div 
+          <motion.div
             style={{ y: y3 }}
             className="absolute top-[40%] left-[60%] w-[500px] h-[500px] rounded-full pointer-events-none blur-[80px]"
           >
-            <div 
+            <div
               className="w-full h-full rounded-full"
-              style={{ 
-                background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(99,102,241,0.08) 40%, transparent 70%)',
-              }} 
+              style={{
+                background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, rgba(99,102,241,0.03) 40%, transparent 70%)',
+              }}
             />
           </motion.div>
         </>
       )}
 
       {/* ── Mesh Gradient Overlay ── */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(at 20% 20%, rgba(99,102,241,0.08) 0%, transparent 40%),
-            radial-gradient(at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 40%),
-            radial-gradient(at 60% 30%, rgba(59,130,246,0.04) 0%, transparent 30%)
+            radial-gradient(at 20% 20%, rgba(99,102,241,0.03) 0%, transparent 40%),
+            radial-gradient(at 80% 80%, rgba(139,92,246,0.02) 0%, transparent 40%),
+            radial-gradient(at 60% 30%, rgba(59,130,246,0.02) 0%, transparent 30%)
           `,
           animation: prefersReducedMotion ? 'none' : 'mesh-shift 20s ease infinite alternate',
         }}
@@ -194,8 +194,8 @@ export default function AuroraBackground() {
       ))}
 
       {/* ── Gradient Fade at Bottom ── */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#030712]/90 pointer-events-none" 
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--bg-primary)]/90 pointer-events-none"
       />
       
       {/* ── Noise Texture (CSS-only, no JS) ── */}
