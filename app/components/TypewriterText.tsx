@@ -16,29 +16,35 @@ export default function TypewriterText() {
 
   useEffect(() => {
     const current = roles[roleIndex];
-    if (!deleting && charIndex < current.length) {
-      const t = setTimeout(() => {
-        setDisplayed(current.slice(0, charIndex + 1));
-        setCharIndex((c) => c + 1);
-      }, 60);
-      return () => clearTimeout(t);
-    }
-    if (!deleting && charIndex === current.length) {
-      const t = setTimeout(() => setDeleting(true), 2000);
-      return () => clearTimeout(t);
-    }
-    if (deleting && charIndex > 0) {
-      const t = setTimeout(() => {
-        setDisplayed(current.slice(0, charIndex - 1));
-        setCharIndex((c) => c - 1);
-      }, 35);
-      return () => clearTimeout(t);
-    }
-    if (deleting && charIndex === 0) {
-      setDeleting(false);
-      setRoleIndex((r) => (r + 1) % roles.length);
-    }
-  }, [charIndex, deleting, roleIndex]);
+    let timeoutId: NodeJS.Timeout;
+
+    const tick = () => {
+      if (!deleting && charIndex < current.length) {
+        timeoutId = setTimeout(() => {
+          setDisplayed(current.slice(0, charIndex + 1));
+          setCharIndex((c) => c + 1);
+        }, 60);
+      } else if (!deleting && charIndex === current.length) {
+        timeoutId = setTimeout(() => {
+          setDeleting(true);
+        }, 2000);
+      } else if (deleting && charIndex > 0) {
+        timeoutId = setTimeout(() => {
+          setDisplayed(current.slice(0, charIndex - 1));
+          setCharIndex((c) => c - 1);
+        }, 35);
+      } else if (deleting && charIndex === 0) {
+        setDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }
+    };
+
+    tick();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [charIndex, deleting, roleIndex, roles]);
 
   return (
     <span className="text-indigo-400 font-mono">
