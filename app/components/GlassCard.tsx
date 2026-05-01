@@ -15,12 +15,12 @@ const glowColors = {
   emerald: "rgba(16, 185, 129,",
 };
 
-export default function GlassCard({ 
-  children, 
+export default function GlassCard({
+  children,
   variant = "default",
-  glowColor = "indigo",
+  glowColor = "blue",
   className = "",
-  ...props 
+  ...props
 }: GlassCardProps) {
   const baseClasses = `
     relative overflow-hidden rounded-3xl

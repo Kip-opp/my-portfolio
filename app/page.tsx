@@ -147,7 +147,7 @@ export default function Home() {
       </div>
 
       {/* ── Navbar ── */}
-      <SpotlightNavbar items={navLinks} />
+      <SpotlightNavbar />
 
       {/* Fixed Logo */}
       <div className="fixed top-10 left-6 z-50">

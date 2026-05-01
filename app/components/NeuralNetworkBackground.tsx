@@ -47,7 +47,7 @@ export default function NeuralNetworkBackground({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const layersRef = useRef<Layer[]>([]);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
 
   const { scrollY } = useScroll();
   const yOffset = useTransform(scrollY, [0, 1000], [0, -30]);
