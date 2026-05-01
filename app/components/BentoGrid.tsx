@@ -61,6 +61,13 @@ const bentoItems: BentoItem[] = [
     tags: ["Docker", "AWS"],
   },
   {
+    title: "WaterMaker",
+    description: "A dedicated image watermarking and redaction tool that runs entirely in the browser using local APIs, with zero network requests, making it particularly suitable for ID cards and other highly sensitive documents.",
+    icon: <Sparkles size={24} />,
+    size: "small",
+    tags: ["JavaScript", "Html5", "CSS", "Image Processing", "Web App"]
+  },
+  {
     title: "Backend APIs",
     description: "Scalable APIs with FastAPI and Node.js.",
     icon: <Server size={24} />,

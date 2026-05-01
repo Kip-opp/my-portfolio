@@ -73,7 +73,7 @@ const projects = [
     tags: ['Next.js', 'AI Engineering'],
     githubLink: 'https://github.com/Kip-opp/lumina',
     liveLink: 'lumina-zeta-swart.vercel.app',
-    image: '',
+    image: '/lumina.png',
   },
   {
     align: 'right' as const,
@@ -94,6 +94,16 @@ const projects = [
     githubLink: 'https://github.com/Kip-opp/lead-scraper',
     liveLink: 'https://lead-scrappergit-dqouwxzdgeyrewjhqqcy9v.streamlit.app/',
     image: '/scraper.png',
+  },
+  {
+    align: 'right' as const,
+    title: 'Img WaterMaker',
+    description:
+      'A dedicated image watermarking and redaction tool that runs entirely in the browser using local APIs, with zero network requests, making it particularly suitable for ID cards and other highly sensitive documents.',
+    tags: ['HTML5', 'Css', 'Javascript','Canvas API'],
+    githubLink: 'https://github.com/Kip-opp/imgwatermaker',
+    liveLink: 'kip-opp.github.io/imgwatermaker/',
+    image: '/watermaker.png',
   },
 ];
 
@@ -183,7 +193,7 @@ export default function Home() {
 
               {/* Role */}
               <div className="text-xl md:text-2xl mb-8 text-[var(--text-secondary)]">
-                Full Stack Engineer & AI Specialist
+                Full Stack Engineer / AI Specialist
               </div>
 
              {/* Description */}
