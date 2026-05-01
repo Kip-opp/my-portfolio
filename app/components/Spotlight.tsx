@@ -22,7 +22,7 @@ export default function Spotlight() {
 
   return (
     <div ref={divRef} className="fixed inset-0 z-10 pointer-events-none overflow-hidden">
-      <div className="absolute inset-0 transition-opacity duration-500" style={{ opacity, background: `radial-gradient(700px circle at ${position.x}px ${position.y}px, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.06) 40%, transparent 70%)` }} />
+      <div className="absolute inset-0 transition-opacity duration-500" style={{ opacity, background: `radial-gradient(700px circle at ${position.x}px ${position.y}px, rgba(14, 165, 233, 0.12), rgba(2, 132, 199, 0.06) 40%, transparent 70%)` }} />
     </div>
   );
 }
