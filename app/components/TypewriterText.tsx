@@ -2,10 +2,11 @@
 import { useState, useEffect } from "react";
 
 const roles = [
-  "Full Stack Engineer",
+  "Hi, there! My name is Kip.",
+  "A Full Stack Engineer",
   "AI Specialist",
   "RAG Systems Builder",
-  "Autonomous Agent Dev",
+  "and an Autonomous Agent Developer",
 ];
 
 export default function TypewriterText() {
@@ -47,9 +48,9 @@ export default function TypewriterText() {
   }, [charIndex, deleting, roleIndex, roles]);
 
   return (
-    <span className="text-indigo-400 font-mono">
+    <span className="text-blue-400 font-mono">
       {displayed}
-      <span className="cursor-blink text-indigo-300 ml-0.5">|</span>
+      <span className="cursor-blink text-blue-300 ml-0.5">|</span>
     </span>
   );
 }
