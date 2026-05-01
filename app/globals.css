@@ -4,20 +4,20 @@
 :root {
   --font-sans: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --accent: #6366f1;
-  --accent-2: #8b5cf6;
-  --accent-glow: rgba(99, 102, 241, 0.4);
+  --accent: #0ea5e9; /* sky-500 */
+  --accent-2: #0369a1; /* sky-700 */
+  --accent-glow: rgba(14, 165, 233, 0.3);
   /* Theme colors */
-  --bg-primary: #030712;
-  --text-primary: #f1f5f9;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --border-color: rgba(255,255,255,0.1);
-  --bg-secondary: rgba(255,255,255,0.05);
-  --bg-accent: rgba(99,102,241,0.1);
-  --border-accent: rgba(99,102,241,0.3);
-  --text-accent: #a5b4fc;
-  --bg-nav: rgba(3,7,18,0.8);
+  --bg-primary: #020617; /* slate-950 */
+  --text-primary: #f1f5f9; /* slate-100 */
+  --text-secondary: #cbd5e1; /* slate-300 */
+  --text-muted: #94a3b8; /* slate-400 */
+  --border-color: rgba(255,255,255,0.08);
+  --bg-secondary: rgba(2, 12, 30, 0.7); /* slate-950 with opacity */
+  --bg-accent: rgba(14, 165, 233, 0.1); /* sky-500 with opacity */
+  --border-accent: rgba(14, 165, 233, 0.2); /* sky-500 with opacity */
+  --text-accent: #7dd3fc; /* sky-300 */
+  --bg-nav: rgba(2, 6, 23, 0.8); /* slate-950 with opacity */
 }
 
 /* Light theme overrides */
@@ -28,9 +28,9 @@
   --text-muted: #9ca3af;
   --border-color: rgba(0,0,0,0.1);
   --bg-secondary: rgba(0,0,0,0.05);
-  --bg-accent: rgba(99,102,241,0.05);
-  --border-accent: rgba(99,102,241,0.2);
-  --text-accent: #4f46e5;
+  --bg-accent: rgba(59,130,246,0.05);
+  --border-accent: rgba(59,130,246,0.2);
+  --text-accent: #1d4ed8;
   --bg-nav: rgba(255,255,255,0.8);
 }
 
@@ -141,7 +141,7 @@ body {
 /* Glow pulse */
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
-  50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(139, 92, 246, 0.2); }
+  50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(14, 165, 233, 0.2); }
 }
 
 .glow-pulse {
@@ -150,7 +150,7 @@ body {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #818cf8 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #7dd3fc 50%, #0ea5e9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -161,6 +161,44 @@ body {
   background: var(--bg-secondary);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
+}
+
+/* Spotlight Navbar */
+.spotlight-nav-bg {
+  background: var(--bg-nav);
+  backdrop-filter: blur(12px);
+}
+
+.glass-border {
+  border: 1px solid var(--border-color);
+}
+
+.spotlight-nav-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Liquid Metal Effect around Spotlight Navbar */
+.liquid-metal-border {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.5) 20%,
+    rgba(14, 165, 233, 0.7) 50%,
+    rgba(56, 189, 248, 0.5) 80%,
+    transparent 100%
+  );
+  background-size: 300% 100%;
+  animation: liquid-shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes liquid-shimmer {
+  0% {
+    background-position: -300% 0;
+  }
+  100% {
+    background-position: 300% 0;
+  }
 }
 
 /* Noise texture overlay */

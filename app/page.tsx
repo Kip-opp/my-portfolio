@@ -1,16 +1,17 @@
 "use client";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import dynamic from 'next/dynamic';
 import ProjectCard from './components/ProjectCard';
 import BentoGrid from './components/BentoGrid';
 import ScrollReveal from './components/ScrollReveal';
-import Navbar from './components/Navbar';
+import { SpotlightNavbar } from './components/SpotlightNavbar';
+import { FlipText } from './components/FlipText';
 import TypewriterText from './components/TypewriterText';
-import { Github, Linkedin, Mail, ArrowDown, ArrowUpRight, Sparkles, Code2, Brain, Layers } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, ArrowUpRight, Sparkles, Code2, Brain, Layers, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Lazy load heavy visual components for better initial load time
-const AuroraBackground = dynamic(() => import('./components/AuroraBackground'), {
+const NeuralNetworkBackground = dynamic(() => import('./components/NeuralNetworkBackground'), {
   ssr: false,
   loading: () => null,
 });
@@ -20,12 +21,17 @@ const Spotlight = dynamic(() => import('./components/Spotlight'), {
   loading: () => null,
 });
 
-const AnimatedShape = dynamic(() => import('./components/SplineViewer').then(mod => ({ default: mod.AnimatedShape })), {
-  ssr: false,
-  loading: () => null,
-});
+
 
 // ─── Data ────────────────────────────────────────────────────────────────────
+
+const navLinks = [
+  { label: "Blog", href: "#blog" },
+  { label: "Work", href: "#work" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+  { label: "About", href: "#about" },
+];
 
 const skills = [
   'Next.js', 'React', 'TypeScript', 'Python', 'LangChain', 'OpenAI',
@@ -105,6 +111,20 @@ const fadeUp = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') || 'dark' : 'dark';
+    if (typeof window !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+    return savedTheme;
+  });
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
   return (
     <main
       className="min-h-screen overflow-x-hidden"
@@ -112,12 +132,30 @@ export default function Home() {
     >
       {/* ── Background layers ── */}
       <div className="fixed inset-0 z-0">
-        <AuroraBackground />
+        <NeuralNetworkBackground />
         <Spotlight />
       </div>
 
       {/* ── Navbar ── */}
-      <Navbar />
+      <SpotlightNavbar items={navLinks} />
+
+      {/* Fixed Logo */}
+      <div className="fixed top-10 left-6 z-50">
+        <a href="#" className="font-mono text-base font-bold text-[var(--text-primary)] tracking-widest uppercase hover:text-[var(--text-accent)] transition-colors">
+          DK<span className="text-[var(--accent)]">.</span>
+        </a>
+      </div>
+
+      {/* Fixed Theme Toggle */}
+      <div className="fixed top-10 right-6 z-50">
+        <button
+          onClick={toggleTheme}
+          className="p-3 rounded-full hover:bg-[var(--bg-secondary)] transition-colors duration-200"
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+      </div>
 
       {/* ── Main content ── */}
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -126,8 +164,6 @@ export default function Home() {
             HERO
         ════════════════════════════════════════ */}
         <section id="about" className="min-h-screen flex flex-col justify-center pt-24 pb-16 relative">
-          {/* 3D Animated Shape */}
-          <AnimatedShape />
           
           <ScrollReveal direction="up" delay={0.2}>
           <motion.div
@@ -137,37 +173,29 @@ export default function Home() {
           >
 
 
-            {/* Name */}
-            <motion.h1
-              variants={fadeUp}
-              className="text-6xl sm:text-8xl md:text-[108px] font-bold tracking-tighter mb-4 leading-[0.9]"
-              style={{
-                background: 'linear-gradient(135deg, #ffffff 0%, #c7d2fe 50%, #818cf8 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              DENIS.  
-KIPRUTO.
-            </motion.h1>
+              {/* Name */}
+              <motion.h1
+                variants={fadeUp}
+                className="text-6xl sm:text-8xl md:text-[108px] font-bold tracking-tighter mb-4 leading-[0.9] text-[var(--text-primary)]"
+              >
+                Hello World... <TypewriterText />
+              </motion.h1>
 
-            {/* Role typewriter */}
-            <motion.div variants={fadeUp} className="text-xl md:text-2xl mb-8 h-8">
-              <TypewriterText />
-            </motion.div>
+              {/* Role */}
+              <div className="text-xl md:text-2xl mb-8 text-[var(--text-secondary)]">
+                Full Stack Engineer & AI Specialist
+              </div>
 
-            {/* Description */}
-            <motion.p
-              variants={fadeUp}
-              className="text-lg md:text-xl max-w-xl leading-relaxed mb-10"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              I build{' '}
-              <span className="text-[var(--text-primary)] font-semibold">autonomous agents</span> and{' '}
-              <span className="text-[var(--text-primary)] font-semibold">RAG systems</span> that solve expensive problems.
-              Turning complex AI into clean, production-ready software.
-            </motion.p>
+             {/* Description */}
+             <p
+               className="text-lg md:text-xl max-w-xl leading-relaxed mb-10"
+               style={{ color: 'var(--text-secondary)' }}
+             >
+               I build{' '}
+               <span className="text-[var(--text-primary)] font-semibold">autonomous agents</span> and{' '}
+               <span className="text-[var(--text-primary)] font-semibold">RAG systems</span> that solve expensive problems.
+               Turning complex AI into clean, production-ready software.
+             </p>
 
             {/* CTAs + Socials */}
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
@@ -175,8 +203,8 @@ KIPRUTO.
                 href="#work"
                 className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[var(--text-primary)] transition-all duration-200 hover:scale-105"
                 style={{
-                  background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                  boxShadow: '0 4px 24px rgba(99,102,241,0.35)',
+                    background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
+                  boxShadow: '0 4px 24px var(--accent-glow)',
                 }}
               >
                 View My Work <ArrowUpRight size={16} />
@@ -204,7 +232,7 @@ KIPRUTO.
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: [0, 8, 0] }}
-            transition={{ delay: 2.5, duration: 2, repeat: Infinity }}
+            transition={{ delay: 2.5, duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
             className="absolute bottom-10 left-6 flex flex-col items-center gap-2"
             style={{ color: 'var(--text-muted)' }}
           >
@@ -234,7 +262,7 @@ KIPRUTO.
                 <span
                   className="text-4xl md:text-5xl font-bold mb-2"
                   style={{
-                    background: 'linear-gradient(135deg, #6366f1, #a78bfa)',
+                    background: 'linear-gradient(135deg, var(--text-accent), var(--accent))',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -253,10 +281,12 @@ KIPRUTO.
         ════════════════════════════════════════ */}
         <section id="skills" className="py-20">
           <ScrollReveal direction="up" delay={0.1}>
-            <p className="font-mono text-xs text-indigo-400 tracking-widest uppercase mb-3">/ What I Do</p>
+            <p className="font-mono text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--text-accent)' }}>/ What I Do</p>
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-14">Services & Expertise</h2>
           </ScrollReveal>
-          <BentoGrid />
+          <div className="relative rounded-3xl overflow-hidden bg-[var(--bg-secondary)] border border-[var(--border-color)] shadow-xl p-8 md:p-12">
+            <BentoGrid />
+          </div>
         </section>
 
         {/* ════════════════════════════════════════
@@ -277,7 +307,7 @@ KIPRUTO.
                   className="inline-flex items-center gap-2 mx-6 text-sm font-mono font-medium transition-colors cursor-default"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  <span className="w-1 h-1 rounded-full bg-indigo-500/50" />
+                  <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-accent)', opacity: '0.5' }} />
                   {skill}
                 </span>
               ))}
@@ -296,7 +326,7 @@ KIPRUTO.
             transition={{ duration: 0.5 }}
             className="mb-20"
           >
-            <p className="font-mono text-xs text-indigo-400 tracking-widest uppercase mb-3">/ Selected Works</p>
+            <p className="font-mono text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--text-accent)' }}>/ Selected Works</p>
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">Things I've Built</h2>
           </motion.div>
 
@@ -326,7 +356,7 @@ KIPRUTO.
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%)',
+                background: 'radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%)',
               }}
             />
 
@@ -337,7 +367,7 @@ KIPRUTO.
                 Let's build something  
 
                 <span style={{
-                  background: 'linear-gradient(135deg, #6366f1, #a78bfa)',
+                  background: 'linear-gradient(135deg, var(--text-accent), var(--accent))',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -353,8 +383,8 @@ KIPRUTO.
                   href="mailto:denis.dev.ke@gmail.com"
                   className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-[var(--text-primary)] transition-all duration-200 hover:scale-105"
                   style={{
-                    background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                    boxShadow: '0 4px 32px rgba(99,102,241,0.4)',
+                  background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
+                    boxShadow: '0 4px 32px var(--accent-glow)',
                   }}
                 >
                   <Mail size={18} /> Send an Email
@@ -375,7 +405,7 @@ KIPRUTO.
           </motion.div>
 
           <p className="mt-12 text-center text-sm font-mono" style={{ color: 'var(--text-muted)' }}>
-            © 2025 Denis Kipruto — Built with Next.js & Tailwind CSS
+            © 2026 Denis Kipruto — Built with Next.js & Tailwind CSS
           </p>
         </footer>
 

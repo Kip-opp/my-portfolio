@@ -5,12 +5,12 @@ import { ReactNode } from "react";
 interface GlassCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
   children: ReactNode;
   variant?: "default" | "hover" | "interactive";
-  glowColor?: "indigo" | "purple" | "blue" | "emerald";
+  glowColor?: "blue" | "emerald";
 }
 
 const glowColors = {
   indigo: "rgba(99, 102, 241,",
-  purple: "rgba(139, 92, 246,",
+
   blue: "rgba(59, 130, 246,",
   emerald: "rgba(16, 185, 129,",
 };
@@ -112,7 +112,7 @@ export function AnimatedBorderCard({
       <div 
         className="absolute inset-0 rounded-3xl animate-gradient-xy"
         style={{
-          background: 'linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6, #6366f1)',
+          background: 'linear-gradient(135deg, #3b82f6, #1d4ed8, #2563eb, #3b82f6)',
           backgroundSize: '300% 300%',
         }}
       />
