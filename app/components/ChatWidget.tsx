@@ -8,7 +8,7 @@ interface Message { role: 'user' | 'assistant'; content: string; }
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Message[]>([{ role: 'assistant', content: "Hi! I'm Denis's AI Assistant. Ask me anything about his skills, projects, or experience." }]);
+  const [messages, setMessages] = useState<Message[]>([{ role: 'assistant', content: "Hi! I'm Julie. Ask me anything about his skills, projects, or experience." }]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -84,7 +84,7 @@ export default function ChatWidget() {
           </motion.div>
         )}
       </AnimatePresence>
-      <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsOpen(!isOpen)} className="h-14 w-14 rounded-full text-white shadow-xl flex items-center justify-center transition-all duration-200" style={{ background: isOpen ? '#4f46e5' : 'linear-gradient(135deg, #6366f1, #8b5cf6)', boxShadow: '0 8px 32px rgba(99,102,241,0.4)' }}>
+      <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsOpen(!isOpen)} className="h-14 w-14 rounded-full text-white shadow-xl flex items-center justify-center transition-all duration-200"       style={{ background: isOpen ? '#1d4ed8' : 'linear-gradient(135deg, #3b82f6, #1d4ed8)', boxShadow: '0 8px 32px rgba(59,130,246,0.4)' }}>
         <AnimatePresence mode="wait">
           {isOpen ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X size={22} /></motion.span> : <motion.span key="msg" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><MessageSquare size={22} /></motion.span>}
         </AnimatePresence>
