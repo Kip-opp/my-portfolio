@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ChatWidget from "./components/ChatWidget";
 
 export const metadata: Metadata = {
   title: "Denis Kipruto | Full Stack Engineer & AI Specialist",
@@ -22,12 +21,11 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" data-theme="light">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://gstatic.com" crossOrigin="anonymous" />
       </head>
       <body style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
         {children}
-        <ChatWidget />
       </body>
     </html>
-   );
+  );
 }
