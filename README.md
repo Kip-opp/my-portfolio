@@ -1,46 +1,44 @@
-# Denis Kipruto | Full Stack Engineer & AI Specialist
+# Denis Kipruto |  Software Engineer & Systems Developer
 
-A modern, interactive portfolio website built with Next.js 14, featuring AI-powered chat functionality, smooth animations, and a responsive design showcasing AI engineering expertise and full-stack development projects.
-
-
+A clean, minimalist portfolio website built with Next.js 16+, showcasing systems engineering expertise, privacy-first web utilities, and AI integration projects.
 
 ## 🚀 Features
 
-- **Interactive Hero Section** - Animated spotlight effects and falling tech icons
-- **AI Chat Assistant** - OpenAI-powered chatbot to answer questions about skills and projects
-- **Project Showcase** - Animated project cards with hover effects and live/demo links
-- **Responsive Design** - Optimized for all screen sizes
-- **Performance Optimized** - Built with Next.js 14 App Router and modern best practices
+- **Professional Branding** - Clean, typography-driven layout with "DENIS K." branding
+- **Systems Engineering Focus** - Emphasis on desktop applications, distributed systems, and architecture
+- **Project Showcase** - Clean project cards displaying verified repositories with live/demo links
+- **Responsive Design** - Optimized for all screen sizes with modern CSS
+- **Performance Optimized** - Built with Next.js 16+ App Router and modern best practices
 - **TypeScript** - Full type safety across the codebase
+- **Glassmorphism UI** - Modern frosted-glass design elements
+- **Dark/Light Theme** - Automatic theme detection with manual toggle
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 16+ (App Router)
 - **Language:** TypeScript
-- **Styling:** CSS Modules + Custom CSS Variables
+- **Styling:** Tailwind CSS + Custom CSS Variables
 - **Animations:** Framer Motion
 - **Icons:** Lucide React
-- **AI:** OpenAI API (GPT-3.5 Turbo)
-- **Fonts:** Space Grotesk (via next/font)
+- **UI Primitives:** Custom glassmorphism components
+- **Fonts:** System UI + Space Grotesk (via next/font)
+- **Build:** Turbopack (Next.js native)
 
 ## 📁 Project Structure
 
 ```
 my-portfolio/
 ├── app/
-│   ├── api/
-│   │   └── chat/
-│   │       └── route.ts        # AI Chat API endpoint
-│   ├── components/
-│   │   ├── ChatWidget.tsx      # AI Chat widget
-│   │   ├── Navbar.tsx          # Navigation bar
-│   │   ├── ProjectCard.tsx     # Project showcase card
-│   │   ├── Spotlight.tsx       # Mouse follower effect
-│   │   ├── TechBackground.tsx # Animated tech icons
-│   │   └── TypewriterText.tsx  # Typewriter animation
-│   ├── globals.css             # Global styles with CSS variables
-│   ├── layout.tsx              # Root layout
+│   ├── layout.tsx              # Root layout with theme support
 │   └── page.tsx                # Home page
+├── components/
+│   ├── BentoGrid.tsx           # Skills/services display
+│   ├── GlassCard.tsx           # Glassmorphism card component
+│   ├── Navbar.tsx              # Navigation bar with theme toggle
+│   ├── ProjectCard.tsx         # Project showcase card
+│   ├── Reveal.tsx              # Scroll reveal animation
+│   └── ScrollReveal.tsx        # Scroll-based animation wrapper
+├── globals.css                 # Global styles with CSS variables
 ├── public/                     # Static assets (images, icons)
 ├── .env.local                  # Environment variables
 ├── next.config.ts              # Next.js configuration
@@ -54,63 +52,50 @@ my-portfolio/
 
 - Node.js 18.17 or later
 - npm, yarn, pnpm, or bun
-- OpenAI API key (for AI chat functionality)
 
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone git@github.com:Kip-opp/my-portfolio.git
-   cd my-portfolio
-   ```
+    ```bash
+    git clone git@github.com:Kip-opp/my-portfolio.git
+    cd my-portfolio
+    ```
 
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-3. Set up environment variables:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Add your OpenAI API key to `.env.local`:
-   ```env
-   OPENAI_API_KEY=sk-your-api-key-here
-   ```
+3. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🔧 Configuration
-
-### Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `OPENAI_API_KEY` | OpenAI API key for AI chat | Yes |
 
 ### Customization
 
 - **Projects:** Edit [`app/page.tsx`](app/page.tsx) to update project cards
 - **Skills:** Update the `skills` array in [`app/page.tsx`](app/page.tsx)
-- **AI Persona:** Modify the system prompt in [`app/api/chat/route.ts`](app/api/chat/route.ts)
+- **Services:** Update the `services` array in [`app/page.tsx`](app/page.tsx)
+- **Stats:** Update the `stats` array in [`app/page.tsx`](app/page.tsx)
 - **Styling:** Customize CSS variables in [`app/globals.css`](app/globals.css)
+- **Theme:** Adjust theme colors in `globals.css` `:root` and `[data-theme='light']` sections
 
-## 💼 Services
+## 💼 Services & Expertise
 
-- **AI & RAG Systems** - Enterprise-grade retrieval-augmented generation pipelines with zero hallucinations
-- **Full Stack Development** - End-to-end web applications with Next.js, TypeScript, and scalable backends
-- **Autonomous Agents** - LLM-powered agents that automate complex workflows and replace manual processes
+- **Desktop & Systems Engineering** - Building robust, high-performance desktop software in C# and WPF adhering to strict MVVM architecture
+- **Full-Stack Web Development** - Crafting responsive web applications with React, TypeScript, Vite, and Supabase backend integration
+- **Privacy-First Utilities** - Engineering zero-upload browser tools and local AI inference pipelines (Ollama) to guarantee absolute data privacy
 
-## 📂 Projects
+## 📂 Featured Projects
 
-- **Omnibrain** - Enterprise-grade RAG system that indexes complex PDFs into vector databases. Built with Next.js, Pinecone, and OpenAI.
-- **Career OS** - SaaS-ready career acceleration tool that uses LLMs to analyze job descriptions and rewrite resumes with custom PDF generation.
-- **Lead Scraper** - Autonomous prospecting engine that scrapes high-value leads from target websites and structures data for sales teams.
+- **Q-flow** - Sophisticated quantum mechanics simulation desktop app built with .NET 9 and WPF. Features real-time probability visualization for qubit gate operations and wavepacket motion, adhering to strict MVVM architecture.
+- **Lumina** - AI-powered writing assistant built with React and Supabase. Offers real-time text analysis, grammar correction, and tone adaptation with dual-provider architecture supporting cloud OpenAI and local Ollama models.
+- **VidForge-TSX** - Centralized discovery platform for generative AI video models. Built with React 18 and TypeScript, leveraging Zustand for high-performance state management and custom Tailwind animation system.
+- **imgwatermaker** - Privacy-first security utility performing 100% client-side image watermarking via HTML5 Canvas API. Designed for sensitive document protection with zero data transmission to external servers.
 
 ## 🚀 Deployment
 
@@ -118,8 +103,7 @@ my-portfolio/
 
 1. Push your code to GitHub
 2. Connect your repo to [Vercel](https://vercel.com)
-3. Add `OPENAI_API_KEY` in Vercel environment variables
-4. Deploy!
+3. Deploy! (No environment variables required for base functionality)
 
 ### Other Platforms
 
@@ -139,4 +123,4 @@ MIT License - feel free to use this template for your own portfolio.
 
 ---
 
-Built with ❤️ using Next.js, Framer Motion, and OpenAI
+Built with ❤️ using Next.js, TypeScript, and modern web technologies
