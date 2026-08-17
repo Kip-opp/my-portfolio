@@ -1,16 +1,16 @@
 "use client";
 import { motion, Variants } from "framer-motion";
-import { 
-  Code2, 
-  Brain, 
-  Database, 
-  Globe, 
-  Cpu, 
-  Server, 
-  Terminal, 
-  Cloud, 
-  Layers, 
-  Box, 
+import {
+  Code2,
+  Brain,
+  Database,
+  Globe,
+  Cpu,
+  Server,
+  Terminal,
+  Cloud,
+  Layers,
+  Box,
   Zap,
   ArrowUpRight,
   Sparkles
