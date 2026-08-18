@@ -26,15 +26,16 @@ export default function ProjectCard({
     <div className="grid gap-6 md:grid-cols-[{align===left?'1fr 350px':'350px 1fr'}] items-center">
       {/* Image Section */}
       <div className="relative">
-        <img 
-          src={image} 
-          alt={`${title} screenshot`}
-          className="rounded-2xl w-[350px] h-[220px] object-cover border border-[var(--border-color)] bg-[var(--bg-secondary)]"
-          onError={(e) => {
-            e.target.src = '/placeholder.png'; 
-            e.target.onerror = null; 
-          }}
-        />
+<img 
+  src={image} 
+  alt={`${title} screenshot`}
+  className="rounded-2xl w-[350px] h-[220px] object-cover border border-[var(--border-color)] bg-[var(--bg-secondary)]"
+  onError={(e) => {
+    const target = e.target as HTMLImageElement;
+    target.src = '/placeholder.png'; 
+    target.onerror = null; 
+  }}
+/>
         {/* Image overlay for better text visibility */}
         <div className="absolute inset-0 rounded-2xl bg-black/30"></div>
       </div>
