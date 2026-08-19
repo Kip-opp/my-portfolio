@@ -1,0 +1,34 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="210" y1="120" x2="920" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="0.5" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="330" cy="270" r="180" fill="url(#accent)" opacity="0.18"/>
+  <circle cx="860" cy="620" r="200" fill="#0EA5E9" opacity="0.12"/>
+  <path d="M200 620C290 520 360 470 450 420C510 386 580 350 660 420C740 490 820 560 940 545" stroke="url(#accent)" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="200" cy="620" r="18" fill="#A78BFA"/>
+  <circle cx="450" cy="420" r="18" fill="#22D3EE"/>
+  <circle cx="660" cy="420" r="18" fill="#34D399"/>
+  <circle cx="940" cy="545" r="18" fill="#F8FAFC"/>
+  <g opacity="0.9">
+    <rect x="130" y="120" width="220" height="68" rx="18" fill="#0F172A" stroke="#334155"/>
+    <text x="172" y="165" fill="#F8FAFC" font-size="32" font-family="Arial, sans-serif" font-weight="700">Q-FLOW</text>
+  </g>
+  <g>
+    <rect x="708" y="170" width="280" height="120" rx="24" fill="#111827" stroke="#334155"/>
+    <path d="M758 230H936M758 284H934" stroke="#A5F3FC" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="790" cy="230" r="14" fill="#67E8F9"/>
+    <circle cx="850" cy="230" r="14" fill="#A78BFA"/>
+    <circle cx="910" cy="230" r="14" fill="#34D399"/>
+  </g>
+  <text x="130" y="758" fill="#E2E8F0" font-size="76" font-family="Arial, sans-serif" font-weight="700">Quantum</text>
+  <text x="130" y="820" fill="#93C5FD" font-size="76" font-family="Arial, sans-serif" font-weight="700">Simulation</text>
+</svg>
