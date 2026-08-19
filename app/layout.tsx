@@ -18,12 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" data-theme="light">
+    <html lang="en" className="scroll-smooth" data-theme="light" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+      <body className="antialiased" style={{ paddingTop: '96px' }}>
         {children}
       </body>
     </html>
