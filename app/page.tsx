@@ -1,20 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import ProjectCard from './components/ProjectCard';
-import BentoGrid from './components/BentoGrid';
 import ScrollReveal from './components/ScrollReveal';
+import SolutionsSection from './components/SolutionsSection';
 import Navbar from './components/Navbar';
-import { Github, Linkedin, Mail, ArrowDown, ArrowUpRight, Code2, Brain, Shield, Cpu } from 'lucide-react';
+import { skills } from './data/skills';
+import { Github, Linkedin, Mail, ArrowDown, ArrowUpRight, Code2, Shield, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
-
-const skills = [
-  'C#', '.NET 9', 'WPF', 'MVVM', 'React 18', 'TypeScript',
-  'Tailwind CSS', 'Supabase', 'OpenAI API', 'Ollama', 'Zustand',
-  'HTML5 Canvas', 'Node.js', 'Vite', 'Git & CI/CD', 'REST APIs',
-];
 
 const stats = [
   { value: '4+', label: 'Shipped Repositories' },
@@ -50,7 +44,7 @@ const projects = [
     tags: ['C#', '.NET 9', 'WPF', 'MVVM'],
     githubLink: 'https://github.com/Kip-opp/Q-flow',
     liveLink: '#',
-    image: '/qflow.png',
+    image: '/qflow.svg',
   },
   {
     align: 'right' as const,
@@ -98,87 +92,73 @@ const fadeUp = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') || 'dark' : 'dark';
-    if (typeof window !== 'undefined') {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-    return savedTheme;
-  });
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  };
-
   return (
     <main
-      className="min-h-screen overflow-x-hidden selection:bg-indigo-500 selection:text-white"
-      style={{ background: 'var(--bg-primary, #09090b)', color: 'var(--text-primary, #f4f4f5)', fontFamily: "system-ui, -apple-system, sans-serif" }}
+      className="min-h-screen overflow-x-hidden selection:bg-[var(--accent)] selection:text-white"
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'var(--font-sans)' }}
     >
       {/* ── Navbar ── */}
       <Navbar />
 
       {/* ── Main content ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-6 sm:px-8 lg:px-10">
 
         {/* ════════════════════════════════════════
             HERO SECTION
         ════════════════════════════════════════ */}
-        <section id="about" className="min-h-screen flex flex-col justify-center pt-24 pb-16 relative">
+        <section id="about" className="min-h-screen flex flex-col justify-center pt-28 pb-16 relative text-center">
           <ScrollReveal direction="up" delay={0.2}>
             <motion.div
               initial="hidden"
               animate="show"
               variants={{ show: { transition: { staggerChildren: 0.12 } } }}
+              className="mx-auto max-w-3xl"
             >
               {/* Name */}
               <motion.h1
                 variants={fadeUp}
-                className="text-5xl sm:text-7xl md:text-[92px] font-bold tracking-tight mb-6 leading-[1.05] text-[var(--text-primary, #f4f4f5)]"
+                className="text-5xl sm:text-7xl md:text-[92px] font-bold tracking-tight mb-6 leading-[1.05] text-[var(--text-primary)]"
               >
-                Denis Kipruto<span className="text-indigo-500">.</span>
+                Denis Kipruto<span className="text-[var(--text-accent)]">.</span>
               </motion.h1>
 
               {/* Role */}
-              <div className="text-xl md:text-2xl mb-6 font-medium text-[var(--text-secondary, #a1a1aa)]">
+              <div className="text-xl md:text-2xl mb-6 font-medium text-[var(--text-secondary)]">
                 Software Engineer & Systems Developer
               </div>
 
               {/* Description */}
               <p
                 className="text-base md:text-lg max-w-2xl leading-relaxed mb-10"
-                style={{ color: 'var(--text-secondary, #a1a1aa)' }}
+                style={{ color: 'var(--text-secondary)' }}
               >
                 I build robust, high-performance software spanning{' '}
-                <span className="text-[var(--text-primary, #f4f4f5)] font-semibold">desktop applications</span>,{' '}
-                <span className="text-[var(--text-primary, #f4f4f5)] font-semibold">privacy-first web utilities</span>, and{' '}
-                <span className="text-[var(--text-primary, #f4f4f5)] font-semibold">AI integration</span>. Turning complex engineering challenges into clean, production-ready applications.
+                <span className="text-[var(--text-primary)] font-semibold">desktop applications</span>,{' '}
+                <span className="text-[var(--text-primary)] font-semibold">privacy-first web utilities</span>, and{' '}
+                <span className="text-[var(--text-primary)] font-semibold">AI integration</span>. Turning complex engineering challenges into clean, production-ready applications.
               </p>
 
               {/* CTAs + Socials */}
-              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
+              <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-4">
                 <a
                   href="#work"
-                  className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-indigo-600 hover:bg-indigo-500 transition-all duration-200 shadow-lg shadow-indigo-500/20"
+                  className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-[var(--accent)] hover:opacity-90 transition-all duration-200 shadow-lg shadow-[0_10px_30px_rgba(37,99,235,0.2)]"
                 >
                   View My Work <ArrowUpRight size={16} />
                 </a>
                 <a
                   href="mailto:denis.dev.ke@gmail.com"
-                  className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[var(--text-secondary, #a1a1aa)] hover:text-[var(--text-primary, #f4f4f5)] transition-all duration-200 bg-[var(--bg-secondary, #18181b)] border border-[var(--border-color, #27272a)]"
+                  className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-200 bg-[var(--bg-secondary)] border border-[var(--border-color)]"
                 >
                   <Mail size={16} /> Get in Touch
                 </a>
 
-                <div className="flex gap-3 ml-2">
+                <div className="flex gap-3 ml-2 justify-center">
                   <a
                     href="https://github.com/Kip-opp"
                     target="_blank"
                     aria-label="GitHub"
-                    className="p-3 rounded-full bg-[var(--bg-secondary, #18181b)] border border-[var(--border-color, #27272a)] text-[var(--text-secondary, #a1a1aa)] hover:text-[var(--text-primary, #f4f4f5)] hover:border-indigo-500 transition-all"
+                    className="p-3 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-accent)] transition-all"
                   >
                     <Github size={18} />
                   </a>
@@ -186,7 +166,7 @@ export default function Home() {
                     href="https://linkedin.com/in/denis-kipruto"
                     target="_blank"
                     aria-label="LinkedIn"
-                    className="p-3 rounded-full bg-[var(--bg-secondary, #18181b)] border border-[var(--border-color, #27272a)] text-[var(--text-secondary, #a1a1aa)] hover:text-[var(--text-primary, #f4f4f5)] hover:border-indigo-500 transition-all"
+                    className="p-3 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-accent)] transition-all"
                   >
                     <Linkedin size={18} />
                   </a>
@@ -200,7 +180,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: [0, 6, 0] }}
             transition={{ delay: 2, duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-            className="absolute bottom-6 left-0 flex flex-col items-center gap-2 text-[var(--text-muted, #71717a)]"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--text-muted)]"
           >
             <span className="text-[10px] uppercase tracking-widest font-mono">Scroll</span>
             <ArrowDown size={14} />
@@ -216,17 +196,17 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-[var(--border-color, #27272a)] bg-[var(--bg-secondary, #18181b)]"
+            className="mx-auto max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-px rounded-3xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-[0_18px_40px_rgba(15,23,42,0.04)]"
           >
             {stats.map((s, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center justify-center py-8 px-6 text-center bg-[var(--bg-primary, #09090b)]"
+                className="flex flex-col items-center justify-center py-8 px-6 text-center bg-[var(--color-card)]"
               >
-                <span className="text-3xl md:text-4xl font-bold mb-1 text-indigo-400">
+                <span className="text-3xl md:text-4xl font-bold mb-1 text-[var(--text-accent)]">
                   {s.value}
                 </span>
-                <span className="text-xs md:text-sm font-medium text-[var(--text-muted, #71717a)]">{s.label}</span>
+                <span className="text-xs md:text-sm font-medium text-[var(--text-muted)]">{s.label}</span>
               </div>
             ))}
           </motion.div>
@@ -235,89 +215,106 @@ export default function Home() {
         {/* ═══════════════════════════════════════
             SERVICES & EXPERTISE
         ═══════════════════════════════════════ */}
-        <section id="skills" className="py-20">
-          <ScrollReveal direction="up" delay={0.1}>
-            <p className="font-mono text-xs tracking-widest uppercase mb-3 text-indigo-400">/ What I Do</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary, #f4f4f5)] mb-10">Services & Expertise</h2>
-          </ScrollReveal>
+        <section id="skills" className="py-20 text-center">
+          <div className="border-y border-[var(--border-color)] py-10 sm:py-12">
+            <ScrollReveal direction="up" delay={0.1}>
+              <p className="font-mono text-xs tracking-widest uppercase mb-3 text-[var(--text-accent)]">/ What I Do</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-10">Services & Expertise</h2>
+            </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((srv, idx) => (
-              <div
-                key={idx}
-                className="p-8 rounded-2xl bg-[var(--bg-secondary, #18181b)] border border-[var(--border-color, #27272a)] flex flex-col justify-between hover:border-indigo-500/50 transition-colors"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-6">
-                    {srv.icon}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {services.map((srv, idx) => (
+                <div
+                  key={idx}
+                    className="p-7 rounded-2xl bg-[var(--color-card)] border border-[var(--border-color)] flex flex-col justify-between hover:border-[var(--text-accent)]/35 hover:-translate-y-1 transition-all"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-[var(--accent)]/10 text-[var(--text-accent)] flex items-center justify-center mb-6">
+                      {srv.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-[var(--text-primary)]">{srv.title}</h3>
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{srv.description}</p>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-[var(--text-primary, #f4f4f5)]">{srv.title}</h3>
-                  <p className="text-sm text-[var(--text-secondary, #a1a1aa)] leading-relaxed">{srv.description}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
+        <div className="py-6">
+          <SolutionsSection />
+        </div>
+
         {/* ═══════════════════════════════════════
-            SKILLS MARQUEE / BADGES
+            CORE TECHNOLOGIES & STACK
         ════════════════════════════════════════ */}
         <section className="py-10">
-          <div className="p-6 rounded-2xl bg-[var(--bg-secondary, #18181b)] border border-[var(--border-color, #27272a)]">
-            <p className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted, #71717a)] mb-4">Core Technologies & Stack</p>
-            <div className="flex flex-wrap gap-2">
-              {skills.map((skill, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-[var(--bg-primary, #09090b)] border border-[var(--border-color, #27272a)] text-[var(--text-secondary, #a1a1aa)]"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+          <div className="rounded-2xl border border-[var(--border-color)] bg-[var(--color-card)] p-6 sm:p-8">
+            <ScrollReveal direction="up" delay={0.1}>
+              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-[var(--text-accent)]">
+                Core Technologies & Stack
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] px-3 py-1.5 font-mono text-xs font-medium text-[var(--text-secondary)] transition-colors hover:border-[var(--color-border-accent)] hover:text-[var(--text-primary)]"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
         {/* ════════════════════════════════════════
             SELECTED WORKS (REPOSITORIES)
         ════════════════════════════════════════ */}
-        <section id="work" className="py-24">
-          <ScrollReveal direction="up" delay={0.1}>
-            <p className="font-mono text-xs tracking-widest uppercase mb-3 text-indigo-400">/ Featured Projects</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary, #f4f4f5)] mb-16">Selected Repositories</h2>
-          </ScrollReveal>
+        <section id="work" className="py-24 text-center">
+          <div className="border-y border-[var(--border-color)] py-10 sm:py-12">
+            <ScrollReveal direction="up" delay={0.1}>
+              <p className="font-mono text-xs tracking-widest uppercase mb-3 text-[var(--text-accent)]">/ Featured Projects</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-16">Selected Repositories</h2>
+            </ScrollReveal>
 
-          <div className="space-y-24">
-            {projects.map((project, index) => (
-              <ScrollReveal key={project.title} direction="up" delay={index * 0.1}>
-                <ProjectCard {...project} />
-              </ScrollReveal>
-            ))}
+            <div className="space-y-24">
+              {projects.map((project, index) => (
+                <ScrollReveal key={project.title} direction="up" delay={index * 0.1}>
+                  <ProjectCard {...project} />
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ═══════════════════════════════════════
             CONTACT FOOTER
         ═══════════════════════════════════════ */}
-        <footer id="contact" className="py-24 border-t border-[var(--border-color, #27272a)] mt-20">
-          <div className="text-center max-w-xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--text-primary, #f4f4f5)]">
-              Let&apos;s build something <span className="text-indigo-400">remarkable.</span>
+        <footer id="contact" className="relative mt-20 border-t border-[var(--border-color)] py-14">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-[var(--accent-secondary)]" />
+          <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+            <div className="max-w-xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--text-primary)]">
+              Let&apos;s build something <span className="text-[var(--text-accent)]">remarkable.</span>
             </h2>
-            <p className="mb-8 text-base text-[var(--text-secondary, #a1a1aa)]">
+            <p className="mb-8 text-base text-[var(--text-secondary)]">
               Have a project in mind or want to discuss software architecture? I&apos;d love to hear from you.
             </p>
             <a
               href="mailto:denis.dev.ke@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white bg-indigo-600 hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white bg-[var(--accent)] hover:opacity-90 transition-all shadow-lg shadow-[0_10px_30px_rgba(37,99,235,0.2)]"
             >
               <Mail size={18} /> Send an Email
             </a>
+            </div>
+            <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[var(--text-secondary)]">
+              <a href="https://github.com/Kip-opp" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-accent)] transition-colors">GitHub</a>
+              <a href="https://linkedin.com/in/denis-kipruto" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-accent)] transition-colors">LinkedIn</a>
+              <a href="mailto:denis.dev.ke@gmail.com" className="hover:text-[var(--text-accent)] transition-colors">Email</a>
+            </div>
           </div>
-
-          <p className="mt-20 text-center text-xs font-mono text-[var(--text-muted, #71717a)]">
-            © 2026 Denis Kipruto — Built with Next.js & Tailwind CSS
-          </p>
+          <p className="mt-12 text-xs font-mono text-[var(--text-muted)]">© 2026 Denis Kipruto · Next.js & Tailwind CSS</p>
         </footer>
 
       </div>
