@@ -13,7 +13,7 @@ export default function Contact() {
           </div>
           <div className="p-4 bg-[var(--bg-secondary)] rounded-lg border border-[var(--border-color)]">
             <h2 className="text-xl font-semibold mb-2">LinkedIn</h2>
-            <p className="text-[var(--text-secondary)]">linkedin.com/in/yourprofile</p>
+            <p className="text-[var(--text-secondary)]">linkedin.com/in/denis-k-338a02395</p>
           </div>
           <div className="p-4 bg-[var(--bg-secondary)] rounded-lg border border-[var(--border-color)]">
             <h2 className="text-xl font-semibold mb-2">GitHub</h2>

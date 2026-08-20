@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Denis Kipruto | Full Stack Engineer & AI Specialist",
-  description: "Portfolio of Denis Kipruto — Full Stack Engineer and AI Specialist building autonomous agents, RAG systems, and high-impact software.",
-  keywords: ["Full Stack Engineer", "AI Specialist", "Next.js", "LangChain", "RAG", "Denis Kipruto"],
+  title: "Denis Kipruto | Software Engineer & Systems Developer",
+  description: "Portfolio of Denis Kipruto, a Software Engineer and Systems Developer building Python and Flask backends, .NET, React and TypeScript, AI, and privacy-first software.",
+  keywords: ["Software Engineer", "Systems Developer", "React", ".NET", "Python", "Flask", "AI", "Denis Kipruto"],
   openGraph: {
-    title: "Denis Kipruto | Full Stack Engineer & AI Specialist",
-    description: "Building autonomous agents and RAG systems that solve expensive problems.",
+    title: "Denis Kipruto | Software Engineer & Systems Developer",
+    description: "Building Python and Flask backends, .NET, React and TypeScript, AI, and privacy-first software.",
     type: "website",
   },
 };
