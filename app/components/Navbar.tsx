@@ -1,17 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Work", href: "#work" },
-  { label: "Solutions", href: "#solutions" },
   { label: "Skills", href: "#skills" },
+  { label: "Solutions", href: "#solutions" },
+  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
     const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') || 'light' : 'light';
     if (typeof window !== 'undefined') {
@@ -67,8 +68,33 @@ export default function Navbar() {
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
+          <button
+            onClick={() => setMenuOpen((open) => !open)}
+            className="rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-2 text-[var(--text-primary)] hover:border-[var(--text-accent)]/30 hover:text-[var(--text-accent)] transition-colors duration-200 sm:hidden"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
       </div>
+      {menuOpen && (
+        <div id="mobile-navigation" className="border-t border-[var(--border-color)] px-4 pb-3 pt-2 sm:hidden">
+          <div className="flex flex-col">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="border-b border-[var(--border-color)] py-3 text-sm font-medium tracking-wide text-[var(--text-secondary)] last:border-b-0 hover:text-[var(--text-primary)]"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </motion.nav>
   );
 }
